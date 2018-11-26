@@ -7,35 +7,64 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="19">
-            </ColumnDefinition>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition>
-            </ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Menu Height="25" VerticalAlignment="Top" Grid.ColumnSpan="3">
-           <MenuItem Header="File" Height="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Height="25" VerticalAlignment="Top" Grid.Row="0">
+
+            <MenuItem Header="File">
                 <MenuItem Header="Save"></MenuItem>
-                <MenuItem Header="Open" ></MenuItem>
-                <MenuItem Header="Close" ></MenuItem>
-                <MenuItem Header="Exit" ></MenuItem>
+                <MenuItem Header="Open"></MenuItem>
+                <MenuItem Header="Close"></MenuItem>
+                <MenuItem Header="Exit"></MenuItem>
             </MenuItem>
-           <MenuItem Header="Debug" Height="25">
-                <MenuItem Header="temp"></MenuItem>
-                <MenuItem Header="temp" ></MenuItem>
-            </MenuItem>
-           <MenuItem Header="Window" Height="25">
-                <MenuItem Header="temp"></MenuItem>
-                <MenuItem Header="temp" ></MenuItem>
-            </MenuItem>
-           <MenuItem Header="Help">
-                <MenuItem Header="temp"></MenuItem>
-                <MenuItem Header="temp" ></MenuItem>
-            </MenuItem>
-        </Menu>
-        <StackPanel>
             
-        </StackPanel>
+            <MenuItem Header="Edit" ></MenuItem>
+
+            <MenuItem Header="Window" ></MenuItem>
+
+            <MenuItem Header="Help" ></MenuItem>
+
+        </Menu>
+        <ToolBarTray VerticalAlignment="Top" Grid.Row="1">
+            <ToolBar Height="25" >
+                <ToggleButton>
+                    ⟲
+                </ToggleButton>
+                <Separator />
+                <Button>
+                    ⟳
+                </Button>
+                <Separator />
+                <Button>
+                    
+                </Button>
+                <Separator />
+                <Button>
+                    3
+                </Button>
+                <TextBox Foreground="LightGray" Width="100"></TextBox>
+            </ToolBar>
+            <ToolBar Height="25" Visibility="Visible">
+                <ToggleButton>
+                    1
+                </ToggleButton>
+                <Separator />
+                <Button>
+                    2
+                </Button>
+                <Separator />
+                <Button>
+                    3
+                </Button>
+                <Separator />
+                <Button>
+                    3
+                </Button>
+                <TextBox Foreground="LightGray" Width="100"></TextBox>
+            </ToolBar>
+        </ToolBarTray>
     </Grid>
 </Window>
