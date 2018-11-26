@@ -8,9 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
-            <MenuItem Height="25">
-                    File
-            </MenuItem>
+           <MenuItem Header="File" Height="25">
+
+           </MenuItem>
         </Menu>
     </Grid>
 </Window>
