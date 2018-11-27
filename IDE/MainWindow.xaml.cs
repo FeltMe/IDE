@@ -64,5 +64,10 @@ namespace IDE
                 MessageBox.Show($"{ex.ToString()}");
             }
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
