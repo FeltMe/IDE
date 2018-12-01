@@ -13,16 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using System.IO;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace IDE
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        //protected XmlDocument doc = new XmlDocument();
-        protected string FilePath { get; set; }
+       //private string filename;
+       //private bool showdialog = true;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -30,39 +32,58 @@ namespace IDE
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           //try
-           //{
-           //    string FilePath = @"C:\Users\sddrozd\source\repos\IDE";
-           //    doc.InnerText = "Kappa ";
-           //    doc.Save(FilePath);
-           //    FilePath = $@"C:\Users\sddrozd\source\repos\IDE\{doc.Name}";
-           //}
-           //catch(Exception ex)
-           //{
-           //   MessageBox.Show($"{ex.ToString()}");
-           //}
-        }   
+
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Cs(*.cs)| ";
+            if (sfd.ShowDialog() == true)
+            {
+                TextRange doc = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
+                using (FileStream fs = File.Create(sfd.FileName))
+                {
+                     if (System.IO.Path.GetExtension(sfd.FileName).ToLower() == ".cs")
+                        doc.Save(fs, DataFormats.Text);
+                    else
+                        doc.Save(fs, DataFormats.Xaml);
+                }
+            }
+
+            //SaveAs();
+
+            //SaveFileDialog sfd = new SaveFileDialog
+            //{
+            //    FileName = "temp",
+            //    Filter = "Cs (*.cs)|"
+            //};
+            //if (sfd.ShowDialog() == true)
+            //{
+            //    StreamWriter writer = new StreamWriter(sfd.FileName);
+            //    writer.Write(GridsOnTaps.ContentStringFormat);
+            //    writer.Close();
+            //}
+
+        }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    doc.LoadXml(System.IO.File.ReadAllText(FilePath));
-            //    XmlElement root = doc.DocumentElement;
-            //    XmlElement Param = doc.CreateElement("PrimaryCalendarPeriods");
-            //    Param.SetAttribute("ID", "ЗначениеID");
-            //    root.AppendChild(Param);
-            //    doc.Save(FilePath);
-            //    XmlNode Node = doc.GetElementById("ЗначениеID");
-            //    Param = doc.CreateElement("ResourceName");
-            //    // добавляем что надо
-            //    Node.AppendChild(Param);
-            //    doc.Save(FilePath);
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show($"{ex.ToString()}");
-            //}
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "Cs (*.cs)|"
+            };
+
+            if (ofd.ShowDialog() == true)
+            {
+                TextRange doc = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
+                using (FileStream fs = new FileStream(ofd.FileName, FileMode.Open))
+                {
+                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".rtf")
+                        doc.Load(fs, DataFormats.Rtf);
+                    else if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".txt")
+                        doc.Load(fs, DataFormats.Text);
+                    else
+                        doc.Load(fs, DataFormats.Xaml);
+                }
+            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
@@ -70,10 +91,59 @@ namespace IDE
             this.Close();
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-           //Window NewProject = new Window();
-           //NewProject.ShowDialog();
+            Process process = new Process();
+            process.StartInfo.FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\css.exe";
+            process.StartInfo.UseShellExecute = !true;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.Arguments = @"/nologo /out: D:\f.exe D:\hello.cs";
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
+            var rez = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            MessageBox.Show(rez);
         }
+
+
+        //void SaveAs()
+        //{
+        //    if (showdialog || filename.Length == 0)
+        //    {
+        //        SaveFileDialog SFD = new SaveFileDialog
+        //        {
+        //            FileName = "temp",
+        //            Filter = "TXT (*.txt)|*.txt|RTF (*.rtf)|*.rtf"
+        //        };
+        //
+        //        if (SFD.ShowDialog() == true)
+        //        {
+        //            filename = SFD.FileName;
+        //            showdialog = false;
+        //        }
+        //        else
+        //            return;
+        //    }
+        //    Save(filename);
+        //}
+
+        //private void Save(string filename)
+        //{
+        //    StreamWriter SW = new StreamWriter(filename);
+        //    SW.Write(Rtb.);
+        //    SW.Close();
+        //}
+
+        //private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        //{
+        //    Window1 second = new Window1
+        //    {
+        //        Height = 400,
+        //        Width = 400,
+        //        Owner = this
+        //    };
+        //    second.Show();
+        //    second.VerticalAlignment = VerticalAlignment.Center;
+        //}
     }
 }

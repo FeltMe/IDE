@@ -19,14 +19,26 @@ namespace IDE
     /// </summary>
     public partial class Window1 : Window
     {
+        public TabItem tap = new TabItem();
         public Window1()
         {
             InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           MessageBox.Show("Test");
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           // RichTextBox rich = new RichTextBox();
+           // Owner.GridsOnTaps.Items.Add(new TabItem {
+           //     Header = name + ".cs",
+           //     Content = rich
+           // });
+           //this.Close();
         }
     }
 }

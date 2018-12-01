@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="6*">
@@ -20,12 +20,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
         <!--Меню-->
         <Menu Height="25" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan ="3">
 
             <MenuItem Header="File">
-                <MenuItem Header="New" Click="MenuItem_Click_3"></MenuItem>
+                <!--<MenuItem Header="New" Click="MenuItem_Click_3"></MenuItem>-->
                 <MenuItem Header="Save" Click="MenuItem_Click"></MenuItem>
                 <MenuItem Header="Open" Click="MenuItem_Click_1"></MenuItem>
                 <MenuItem Header="Exit" Click="MenuItem_Click_2"></MenuItem>
@@ -37,8 +37,8 @@
 
             <MenuItem Header="Help" ></MenuItem>
         </Menu>
-        
-        
+
+
         <!--Тулбар под меню-->
         <ToolBarTray VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan = "3">
             <ToolBar Height="25" >
@@ -56,16 +56,17 @@
                 <Button Click="MenuItem_Click_1">
                     <Image Source="Res/Open.jpg"></Image>
                 </Button>
-                <ComboBox>
-                    <ComboBoxItem IsSelected="True">
-                        Debug
-                    </ComboBoxItem>
-                </ComboBox>
+                <Button Click="Button_Click">
+                    <Image Source="Res/debug.png">
+                        
+                    </Image>
+                </Button>
+
             </ToolBar>
             <!--<ToolBar Height="25" Visibility="Visible"/>-->
         </ToolBarTray>
-        
-        
+
+
         <!--Правий Тулбар-->
         <TabControl Grid.Column="2" Grid.Row="2">
             <TabItem Header="Solution">
@@ -80,19 +81,21 @@
                 </TreeView>
             </TabItem>
         </TabControl>
-        
-        
+
+
         <!--Лівий Тулбар-->
         <TabControl Grid.Column="0" Grid.Row="2" TabStripPlacement="Right">
             <TabItem Header="Server Explorer">Temp</TabItem>
             <TabItem Header="Toolbox">Temp</TabItem>
             <TabItem Header="Data S">Temp</TabItem>
         </TabControl>
-        
-        
-        
         <!--Центральний тулбар-->
-        <TabControl x:Name="CentralToolBar" Grid.Column="1" Grid.Row="2"/>
+        <TabControl Grid.Column="1" Grid.Row="2" x:Name="GridsOnTaps">
+            <TabItem Header="temp.cs">
+                <RichTextBox x:Name="Rtb">
 
+                </RichTextBox>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

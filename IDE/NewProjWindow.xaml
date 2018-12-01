@@ -12,25 +12,38 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
         <StackPanel Grid.Column="1">
-            <Button Height="30" Click="Button_Click">
+            <RadioButton Height="30" Click="Button_Click">
                 C#
-            </Button>
-            <Button Height="30">
+            </RadioButton>
+            <RadioButton Height="30">
                 C++
-            </Button>
-            <Button Height="30">
+            </RadioButton>
+            <RadioButton Height="30">
                 Some
-            </Button>
+            </RadioButton>
         </StackPanel>
-            <TreeView>
-                <TreeViewItem Header="Temp">
-                    <TreeViewItem Header="temp" />
-                    <TreeViewItem Header="temp" />
-                </TreeViewItem>
-            </TreeView>
-        <Label Grid.Column=" 2 " VerticalAlignment="Center">
+        <TreeView>
+            <TreeViewItem Header="Temp">
+                <TreeViewItem Header="temp" />
+                <TreeViewItem Header="temp" />
+            </TreeViewItem>
+        </TreeView>
+        <Label Grid.Column=" 2 " VerticalAlignment="Center" Margin="0,137">
             Label
         </Label>
+        <Button Grid.Row="1" Grid.Column="2" Click="Button_Click_1">
+            Creat
+        </Button>
+        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Margin="0,0,0,20">
+            <Label>some name =</Label>
+            <TextBox x:Name="name" Background="Aqua">
+
+            </TextBox>
+        </StackPanel>
     </Grid>
 </Window>
