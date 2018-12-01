@@ -22,9 +22,9 @@ namespace IDE
 
     public partial class MainWindow : Window
     {
-       //private string filename;
-       //private bool showdialog = true;
-        
+        //private string filename;
+        //private bool showdialog = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,33 +34,36 @@ namespace IDE
         {
 
 
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Cs(*.cs)| ";
-            if (sfd.ShowDialog() == true)
-            {
-                TextRange doc = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
-                using (FileStream fs = File.Create(sfd.FileName))
-                {
-                     if (System.IO.Path.GetExtension(sfd.FileName).ToLower() == ".cs")
-                        doc.Save(fs, DataFormats.Text);
-                    else
-                        doc.Save(fs, DataFormats.Xaml);
-                }
-            }
+           //SaveFileDialog sfd = new SaveFileDialog();
+           //sfd.Filter = "Cs(*.cs)| ";
+           //if (sfd.ShowDialog() == true)
+           //{
+           //    TextRange doc = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
+           //    using (FileStream fs = File.Create(sfd.FileName))
+           //    {
+           //         if (System.IO.Path.GetExtension(sfd.FileName).ToLower() == ".cs")
+           //            doc.Save(fs, DataFormats.Text);
+           //        else
+           //            doc.Save(fs, DataFormats.Xaml);
+           //    }
+           //}
 
             //SaveAs();
 
-            //SaveFileDialog sfd = new SaveFileDialog
-            //{
-            //    FileName = "temp",
-            //    Filter = "Cs (*.cs)|"
-            //};
-            //if (sfd.ShowDialog() == true)
-            //{
-            //    StreamWriter writer = new StreamWriter(sfd.FileName);
-            //    writer.Write(GridsOnTaps.ContentStringFormat);
-            //    writer.Close();
-            //}
+          SaveFileDialog sfd = new SaveFileDialog
+          {
+              FileName = "temp",
+              Filter = "Txt (*.txt)|*.txt|All files (*.*)|*.*"
+              //Filter = "Cs (*.cs)|"
+          };
+          if (sfd.ShowDialog() == true)
+          {
+              var textRange = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
+              string Str = textRange.Text;
+              StreamWriter writer = new StreamWriter(sfd.FileName);
+              writer.Write(Str);
+              writer.Close();
+          }
 
         }
 
@@ -68,17 +71,17 @@ namespace IDE
         {
             OpenFileDialog ofd = new OpenFileDialog
             {
-                Filter = "Cs (*.cs)|"
+                Filter = "Txt (*.txt)|*.txt|All files (*.*)|*.*"
             };
 
             if (ofd.ShowDialog() == true)
-            {
+            { 
                 TextRange doc = new TextRange(Rtb.Document.ContentStart, Rtb.Document.ContentEnd);
                 using (FileStream fs = new FileStream(ofd.FileName, FileMode.Open))
                 {
-                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".rtf")
+                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".txt")
                         doc.Load(fs, DataFormats.Rtf);
-                    else if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".txt")
+                    else if (System.IO.Path.GetExtension(ofd.FileName).ToLower() == ".rtf")
                         doc.Load(fs, DataFormats.Text);
                     else
                         doc.Load(fs, DataFormats.Xaml);
@@ -94,10 +97,10 @@ namespace IDE
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Process process = new Process();
-            process.StartInfo.FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\css.exe";
+            process.StartInfo.FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe";
             process.StartInfo.UseShellExecute = !true;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.Arguments = @"/nologo /out: D:\f.exe D:\hello.cs";
+            process.StartInfo.Arguments = @"/nologo /out:D:\f.exe D:\hi.txt";
             process.StartInfo.RedirectStandardOutput = true;
             process.Start();
             var rez = process.StandardOutput.ReadToEnd();
